@@ -79,37 +79,78 @@ button:hover{
 <script>
 
 // ===== TẠO 60 CÂU =====
-const questions = [];
-const pairs = [
-["E","I"],["E","I"],["E","I"],["E","I"],["E","I"],
-["S","N"],["S","N"],["S","N"],["S","N"],["S","N"],
-["T","F"],["T","F"],["T","F"],["T","F"],["T","F"],
-["J","P"],["J","P"],["J","P"],["J","P"],["J","P"]
+const questions = [
+
+/* ===== E – I (15 câu) ===== */
+{ text:"1. Sau giờ làm bạn thường:", answers:[{text:"Đi gặp bạn bè",type:"E"},{text:"Về nhà nghỉ ngơi một mình",type:"I"}]},
+{ text:"2. Khi làm việc nhóm bạn:", answers:[{text:"Chủ động phát biểu",type:"E"},{text:"Lắng nghe nhiều hơn",type:"I"}]},
+{ text:"3. Bạn cảm thấy tràn đầy năng lượng khi:", answers:[{text:"Ở giữa đám đông",type:"E"},{text:"Ở không gian yên tĩnh",type:"I"}]},
+{ text:"4. Khi có vấn đề bạn thường:", answers:[{text:"Nói ra để suy nghĩ rõ hơn",type:"E"},{text:"Suy nghĩ kỹ trong đầu trước",type:"I"}]},
+{ text:"5. Bạn thích môi trường:", answers:[{text:"Sôi động",type:"E"},{text:"Trầm lắng",type:"I"}]},
+{ text:"6. Cuối tuần lý tưởng là:", answers:[{text:"Tham gia hoạt động xã hội",type:"E"},{text:"Đọc sách hoặc xem phim một mình",type:"I"}]},
+{ text:"7. Bạn dễ dàng:", answers:[{text:"Bắt chuyện với người lạ",type:"E"},{text:"Chờ người khác bắt chuyện",type:"I"}]},
+{ text:"8. Khi học bạn thích:", answers:[{text:"Thảo luận nhóm",type:"E"},{text:"Tự học cá nhân",type:"I"}]},
+{ text:"9. Bạn thường:", answers:[{text:"Thể hiện cảm xúc ra ngoài",type:"E"},{text:"Giữ cảm xúc trong lòng",type:"I"}]},
+{ text:"10. Bạn suy nghĩ tốt hơn khi:", answers:[{text:"Trao đổi trực tiếp",type:"E"},{text:"Viết hoặc suy ngẫm một mình",type:"I"}]},
+{ text:"11. Bạn thích công việc:", answers:[{text:"Tiếp xúc nhiều người",type:"E"},{text:"Tập trung chuyên môn cá nhân",type:"I"}]},
+{ text:"12. Khi đi sự kiện bạn:", answers:[{text:"Ở lại đến cuối",type:"E"},{text:"Muốn về sớm",type:"I"}]},
+{ text:"13. Bạn cảm thấy thoải mái khi:", answers:[{text:"Là trung tâm chú ý",type:"E"},{text:"Không bị chú ý nhiều",type:"I"}]},
+{ text:"14. Trong lớp học bạn:", answers:[{text:"Hay phát biểu",type:"E"},{text:"Ít phát biểu",type:"I"}]},
+{ text:"15. Bạn thích:", answers:[{text:"Hoạt động tập thể",type:"E"},{text:"Hoạt động cá nhân",type:"I"}]},
+
+/* ===== S – N (15 câu) ===== */
+{ text:"16. Bạn chú ý nhiều đến:", answers:[{text:"Chi tiết cụ thể",type:"S"},{text:"Bức tranh tổng thể",type:"N"}]},
+{ text:"17. Bạn tin tưởng hơn vào:", answers:[{text:"Kinh nghiệm thực tế",type:"S"},{text:"Trực giác",type:"N"}]},
+{ text:"18. Khi học bạn thích:", answers:[{text:"Ví dụ minh họa rõ ràng",type:"S"},{text:"Khái niệm trừu tượng",type:"N"}]},
+{ text:"19. Bạn quan tâm:", answers:[{text:"Hiện tại",type:"S"},{text:"Tương lai",type:"N"}]},
+{ text:"20. Bạn thường:", answers:[{text:"Làm theo hướng dẫn cụ thể",type:"S"},{text:"Tự nghĩ cách mới",type:"N"}]},
+{ text:"21. Bạn giỏi:", answers:[{text:"Ghi nhớ sự kiện",type:"S"},{text:"Sáng tạo ý tưởng",type:"N"}]},
+{ text:"22. Bạn thích đọc:", answers:[{text:"Thông tin thực tế",type:"S"},{text:"Tiểu thuyết giả tưởng",type:"N"}]},
+{ text:"23. Bạn thiên về:", answers:[{text:"Thực tế",type:"S"},{text:"Sáng tạo",type:"N"}]},
+{ text:"24. Khi mô tả bạn:", answers:[{text:"Chi tiết cụ thể",type:"S"},{text:"Nói ý chính",type:"N"}]},
+{ text:"25. Bạn thích:", answers:[{text:"Quy trình rõ ràng",type:"S"},{text:"Khám phá mới",type:"N"}]},
+{ text:"26. Bạn tin:", answers:[{text:"Những gì thấy được",type:"S"},{text:"Khả năng tiềm ẩn",type:"N"}]},
+{ text:"27. Bạn quan sát:", answers:[{text:"Sự thật cụ thể",type:"S"},{text:"Ý nghĩa ẩn sau",type:"N"}]},
+{ text:"28. Bạn làm việc tốt hơn khi:", answers:[{text:"Có dữ liệu rõ ràng",type:"S"},{text:"Có ý tưởng tự do",type:"N"}]},
+{ text:"29. Bạn thích giải quyết:", answers:[{text:"Vấn đề thực tế",type:"S"},{text:"Vấn đề lý thuyết",type:"N"}]},
+{ text:"30. Bạn bị thu hút bởi:", answers:[{text:"Kết quả cụ thể",type:"S"},{text:"Tầm nhìn dài hạn",type:"N"}]},
+
+/* ===== T – F (15 câu) ===== */
+{ text:"31. Khi quyết định bạn ưu tiên:", answers:[{text:"Logic",type:"T"},{text:"Cảm xúc",type:"F"}]},
+{ text:"32. Bạn coi trọng:", answers:[{text:"Công bằng",type:"T"},{text:"Sự hòa hợp",type:"F"}]},
+{ text:"33. Bạn đánh giá vấn đề dựa trên:", answers:[{text:"Sự thật",type:"T"},{text:"Tác động đến người khác",type:"F"}]},
+{ text:"34. Khi góp ý bạn:", answers:[{text:"Thẳng thắn",type:"T"},{text:"Nhẹ nhàng",type:"F"}]},
+{ text:"35. Bạn bị thuyết phục bởi:", answers:[{text:"Lý lẽ",type:"T"},{text:"Cảm xúc",type:"F"}]},
+{ text:"36. Bạn thiên về:", answers:[{text:"Phân tích",type:"T"},{text:"Thấu cảm",type:"F"}]},
+{ text:"37. Bạn giải quyết xung đột bằng:", answers:[{text:"Lý trí",type:"T"},{text:"Thương lượng cảm xúc",type:"F"}]},
+{ text:"38. Bạn thích môi trường:", answers:[{text:"Rõ ràng nguyên tắc",type:"T"},{text:"Quan tâm con người",type:"F"}]},
+{ text:"39. Khi tranh luận bạn:", answers:[{text:"Giữ quan điểm logic",type:"T"},{text:"Quan tâm cảm xúc đối phương",type:"F"}]},
+{ text:"40. Bạn đánh giá thành công qua:", answers:[{text:"Kết quả",type:"T"},{text:"Mối quan hệ",type:"F"}]},
+{ text:"41. Bạn ưu tiên:", answers:[{text:"Hiệu quả",type:"T"},{text:"Sự hài hòa",type:"F"}]},
+{ text:"42. Khi làm việc nhóm bạn:", answers:[{text:"Tập trung nhiệm vụ",type:"T"},{text:"Tập trung cảm xúc nhóm",type:"F"}]},
+{ text:"43. Bạn thích người:", answers:[{text:"Rõ ràng lý trí",type:"T"},{text:"Ấm áp",type:"F"}]},
+{ text:"44. Khi nhận xét bạn:", answers:[{text:"Phân tích lỗi",type:"T"},{text:"Động viên trước",type:"F"}]},
+{ text:"45. Bạn tin quyết định nên dựa trên:", answers:[{text:"Nguyên tắc",type:"T"},{text:"Hoàn cảnh con người",type:"F"}]},
+
+/* ===== J – P (15 câu) ===== */
+{ text:"46. Bạn thích:", answers:[{text:"Lên kế hoạch trước",type:"J"},{text:"Tùy cơ ứng biến",type:"P"}]},
+{ text:"47. Bạn làm việc tốt khi:", answers:[{text:"Có deadline rõ ràng",type:"J"},{text:"Linh hoạt thời gian",type:"P"}]},
+{ text:"48. Bạn thường:", answers:[{text:"Hoàn thành sớm",type:"J"},{text:"Làm gần sát hạn",type:"P"}]},
+{ text:"49. Bạn thích:", answers:[{text:"Quyết định nhanh",type:"J"},{text:"Giữ nhiều lựa chọn",type:"P"}]},
+{ text:"50. Bàn làm việc của bạn:", answers:[{text:"Ngăn nắp",type:"J"},{text:"Tự do sáng tạo",type:"P"}]},
+{ text:"51. Bạn thấy thoải mái khi:", answers:[{text:"Có kế hoạch",type:"J"},{text:"Không bị ràng buộc",type:"P"}]},
+{ text:"52. Bạn xử lý công việc:", answers:[{text:"Theo danh sách",type:"J"},{text:"Theo cảm hứng",type:"P"}]},
+{ text:"53. Bạn thích chuyến đi:", answers:[{text:"Lên lịch trước",type:"J"},{text:"Đi tự phát",type:"P"}]},
+{ text:"54. Bạn thường:", answers:[{text:"Quyết định dứt khoát",type:"J"},{text:"Cân nhắc lâu",type:"P"}]},
+{ text:"55. Bạn cảm thấy áp lực khi:", answers:[{text:"Mọi việc chưa rõ ràng",type:"J"},{text:"Bị ép quyết định sớm",type:"P"}]},
+{ text:"56. Bạn thích công việc:", answers:[{text:"Có cấu trúc",type:"J"},{text:"Tự do sáng tạo",type:"P"}]},
+{ text:"57. Bạn ưu tiên:", answers:[{text:"Ổn định",type:"J"},{text:"Khám phá",type:"P"}]},
+{ text:"58. Bạn thường lập:", answers:[{text:"Kế hoạch dài hạn",type:"J"},{text:"Tùy tình huống",type:"P"}]},
+{ text:"59. Bạn thích:", answers:[{text:"Hoàn tất rồi mới nghỉ",type:"J"},{text:"Làm nhiều việc song song",type:"P"}]},
+{ text:"60. Bạn cảm thấy hài lòng khi:", answers:[{text:"Mọi việc có trật tự",type:"J"},{text:"Mọi thứ linh hoạt",type:"P"}]}
+
 ];
-
-const sampleText = {
-"E":"Bạn thích giao tiếp và tương tác xã hội.",
-"I":"Bạn thích không gian riêng và suy nghĩ nội tâm.",
-"S":"Bạn tập trung vào thực tế và chi tiết.",
-"N":"Bạn thích ý tưởng và tương lai.",
-"T":"Bạn quyết định dựa trên logic.",
-"F":"Bạn quyết định dựa trên cảm xúc.",
-"J":"Bạn thích kế hoạch rõ ràng.",
-"P":"Bạn thích linh hoạt tự do."
-};
-
-for(let i=0;i<15;i++){
-pairs.forEach(p=>{
-questions.push({
-text:"Câu hỏi số "+(questions.length+1)+": Bạn nghiêng về xu hướng nào hơn?",
-answers:[
-{text:sampleText[p[0]],type:p[0]},
-{text:sampleText[p[1]],type:p[1]}
-]
-});
-});
-}
-
+  
 questions.length=60;
 
 let current=0;
@@ -174,4 +215,5 @@ showQuestion();
 </body>
 </html>
 </html>
+
 
