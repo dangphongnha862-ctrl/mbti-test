@@ -2,21 +2,71 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Trắc nghiệm MBTI</title>
+<title>MBTI Pro 60 Câu</title>
 <style>
-body{font-family:Arial;max-width:800px;margin:auto;padding:20px}
-h2{text-align:center}
-.question{font-size:20px;margin:20px 0}
-button{display:block;width:100%;padding:12px;margin:8px 0;border:none;background:#4CAF50;color:white;font-size:16px;cursor:pointer;border-radius:5px}
-button:hover{background:#45a049}
-.progress{height:20px;background:#ddd;border-radius:10px;margin:15px 0}
-.progress-bar{height:20px;background:#4CAF50;width:0%;border-radius:10px}
-.result{background:#f4f4f4;padding:20px;border-radius:10px;margin-top:20px}
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#fde2e4,#e2ece9,#e0c3fc);
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+}
+.container{
+  background:#ffffff;
+  padding:40px;
+  border-radius:30px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.1);
+}
+h1{
+  text-align:center;
+  color:#7b2cbf;
+}
+.question{
+  font-size:20px;
+  margin:25px 0;
+  color:#5a189a;
+}
+button{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border:none;
+  border-radius:20px;
+  background:#cdb4db;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{
+  background:#b583d3;
+  transform:scale(1.02);
+}
+.progress{
+  height:18px;
+  background:#f1f1f1;
+  border-radius:20px;
+  margin:20px 0;
+}
+.progress-bar{
+  height:18px;
+  background:#ffafcc;
+  width:0%;
+  border-radius:20px;
+}
+.result{
+  background:#f8edeb;
+  padding:30px;
+  border-radius:25px;
+  margin-top:20px;
+  color:#5a189a;
+}
 </style>
 </head>
 <body>
 
-<h2>BÀI TRẮC NGHIỆM MBTI</h2>
+<div class="container">
+<h1>🌸 TRẮC NGHIỆM MBTI PRO 🌸</h1>
 
 <div class="progress">
 <div class="progress-bar" id="progress"></div>
@@ -24,15 +74,43 @@ button:hover{background:#45a049}
 
 <div id="quiz"></div>
 <div id="result"></div>
+</div>
 
 <script>
 
-const questions = [
-{ text:"Sau một ngày nhiều tương tác, bạn muốn:", answers:[{text:"Tiếp tục gặp gỡ mọi người",type:"E"},{text:"Ở một mình nghỉ ngơi",type:"I"}]},
-{ text:"Bạn chú ý nhiều đến:", answers:[{text:"Chi tiết cụ thể",type:"S"},{text:"Ý tưởng tương lai",type:"N"}]},
-{ text:"Khi quyết định bạn dựa vào:", answers:[{text:"Logic",type:"T"},{text:"Cảm xúc",type:"F"}]},
-{ text:"Bạn thích làm việc:", answers:[{text:"Có kế hoạch rõ ràng",type:"J"},{text:"Linh hoạt",type:"P"}]}
+// ===== TẠO 60 CÂU =====
+const questions = [];
+const pairs = [
+["E","I"],["E","I"],["E","I"],["E","I"],["E","I"],
+["S","N"],["S","N"],["S","N"],["S","N"],["S","N"],
+["T","F"],["T","F"],["T","F"],["T","F"],["T","F"],
+["J","P"],["J","P"],["J","P"],["J","P"],["J","P"]
 ];
+
+const sampleText = {
+"E":"Bạn thích giao tiếp và tương tác xã hội.",
+"I":"Bạn thích không gian riêng và suy nghĩ nội tâm.",
+"S":"Bạn tập trung vào thực tế và chi tiết.",
+"N":"Bạn thích ý tưởng và tương lai.",
+"T":"Bạn quyết định dựa trên logic.",
+"F":"Bạn quyết định dựa trên cảm xúc.",
+"J":"Bạn thích kế hoạch rõ ràng.",
+"P":"Bạn thích linh hoạt tự do."
+};
+
+for(let i=0;i<15;i++){
+pairs.forEach(p=>{
+questions.push({
+text:"Câu hỏi số "+(questions.length+1)+": Bạn nghiêng về xu hướng nào hơn?",
+answers:[
+{text:sampleText[p[0]],type:p[0]},
+{text:sampleText[p[1]],type:p[1]}
+]
+});
+});
+}
+
+questions.length=60;
 
 let current=0;
 let score={E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
@@ -42,7 +120,7 @@ if(current>=questions.length){showResult();return;}
 const q=questions[current];
 const quiz=document.getElementById("quiz");
 quiz.innerHTML="<div class='question'>"+q.text+"</div>";
-q.answers.forEach(function(a){
+q.answers.forEach(a=>{
 const btn=document.createElement("button");
 btn.innerText=a.text;
 btn.onclick=function(){
@@ -66,14 +144,34 @@ result+=score.S>score.N?"S":"N";
 result+=score.T>score.F?"T":"F";
 result+=score.J>score.P?"J":"P";
 
+const descriptions={
+"INTJ":"Nhà chiến lược – Phù hợp: Quản lý cấp cao, IT, Phân tích dữ liệu, Kỹ sư hệ thống.",
+"INFP":"Người lý tưởng – Phù hợp: Nhà văn, Thiết kế sáng tạo, Tâm lý học.",
+"ENTJ":"Nhà lãnh đạo – Phù hợp: CEO, Quản trị kinh doanh, Marketing chiến lược.",
+"ENFP":"Người truyền cảm hứng – Phù hợp: Truyền thông, Nhân sự, Startup.",
+"ISTJ":"Người trách nhiệm – Phù hợp: Kế toán, Luật, Quản trị hành chính.",
+"ISFJ":"Người chăm sóc – Phù hợp: Điều dưỡng, Giáo dục, Công tác xã hội.",
+"ESTJ":"Nhà điều hành – Phù hợp: Quản lý dự án, Kinh doanh.",
+"ESFJ":"Người hỗ trợ – Phù hợp: Dịch vụ khách hàng, Giáo viên.",
+"INTP":"Nhà tư duy – Phù hợp: Lập trình, Nghiên cứu khoa học.",
+"ENTP":"Nhà tranh luận – Phù hợp: Luật sư, Marketing, Doanh nhân.",
+"INFJ":"Người cố vấn – Phù hợp: Tâm lý, Cố vấn giáo dục.",
+"ENFJ":"Người dẫn dắt – Phù hợp: Huấn luyện viên, Nhân sự.",
+"ISTP":"Nhà kỹ thuật – Phù hợp: Cơ khí, IT phần cứng.",
+"ISFP":"Người nghệ sĩ – Phù hợp: Nghệ thuật, Thiết kế.",
+"ESTP":"Người hành động – Phù hợp: Sales, Kinh doanh.",
+"ESFP":"Người biểu diễn – Phù hợp: Giải trí, Tổ chức sự kiện."
+};
+
 document.getElementById("quiz").innerHTML="";
 document.getElementById("result").innerHTML=
-"<div class='result'><h2>Kết quả của bạn: "+result+"</h2></div>";
+"<div class='result'><h2>Kết quả của bạn: "+result+"</h2><p>"+descriptions[result]+"</p><br><button onclick='location.reload()'>Làm lại</button></div>";
 }
 
 showQuestion();
 
 </script>
-
 </body>
 </html>
+</html>
+
