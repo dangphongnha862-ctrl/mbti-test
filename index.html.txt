@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Tr?c nghi?m MBTI</title>
+<style>
+body{font-family:Arial;max-width:800px;margin:auto;padding:20px}
+h2{text-align:center}
+.question{font-size:20px;margin:20px 0}
+button{display:block;width:100%;padding:12px;margin:8px 0;border:none;background:#4CAF50;color:white;font-size:16px;cursor:pointer;border-radius:5px}
+button:hover{background:#45a049}
+.progress{height:20px;background:#ddd;border-radius:10px;margin:15px 0}
+.progress-bar{height:20px;background:#4CAF50;width:0%;border-radius:10px}
+.result{background:#f4f4f4;padding:20px;border-radius:10px;margin-top:20px}
+</style>
+</head>
+<body>
+
+<h2>BÀI TR?C NGHI?M MBTI</h2>
+
+<div class="progress">
+<div class="progress-bar" id="progress"></div>
+</div>
+
+<div id="quiz"></div>
+<div id="result"></div>
+
+<script>
+
+const questions = [
+{ text:"Sau m?t ngày nhi?u tuong tác, b?n mu?n:", answers:[{text:"Ti?p t?c g?p g? m?i ngu?i",type:"E"},{text:"? m?t mình ngh? ngoi",type:"I"}]},
+{ text:"B?n suy nghi t?t nh?t khi:", answers:[{text:"Nói ra thành l?i",type:"E"},{text:"Suy nghi trong d?u",type:"I"}]},
+{ text:"B?n tin vào:", answers:[{text:"D? li?u th?c t?",type:"S"},{text:"Ý tu?ng tuong lai",type:"N"}]},
+{ text:"B?n chú ý nhi?u d?n:", answers:[{text:"Chi ti?t c? th?",type:"S"},{text:"B?c tranh l?n",type:"N"}]},
+{ text:"Khi quy?t d?nh b?n d?a vào:", answers:[{text:"Logic",type:"T"},{text:"C?m xúc",type:"F"}]},
+{ text:"B?n coi tr?ng:", answers:[{text:"Công b?ng khách quan",type:"T"},{text:"S? hòa h?p",type:"F"}]},
+{ text:"B?n thích làm vi?c:", answers:[{text:"Có k? ho?ch rõ ràng",type:"J"},{text:"Linh ho?t",type:"P"}]},
+{ text:"B?n c?m th?y an tâm khi:", answers:[{text:"M?i vi?c du?c quy?t d?nh",type:"J"},{text:"V?n còn nhi?u l?a ch?n",type:"P"}]}
+];
+
+let current=0;
+let score={E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+
+function showQuestion(){
+if(current>=questions.length){showResult();return;}
+const q=questions[current];
+const quiz=document.getElementById("quiz");
+quiz.innerHTML=`<div class="question">${q.text}</div>`;
+q.answers.forEach(a=>{
+const btn=document.createElement("button");
+btn.innerText=a.text;
+btn.onclick=()=>{
+score[a.type]++;
+current++;
+updateProgress();
+showQuestion();
+};
+quiz.appendChild(btn);
+});
+}
+
+function updateProgress(){
+document.getElementById("progress").style.width=(current/questions.length*100)+"%";
+}
+
+function showResult(){
+let result="";
+result+=score.E>score.I?"E":"I";
+result+=score.S>score.N?"S":"N";
+result+=score.T>score.F?"T":"F";
+result+=score.J>score.P?"J":"P";
+
+document.getElementById("quiz").innerHTML="";
+document.getElementById("result").innerHTML=
+`<div class="result">
+<h2>K?t qu? c?a b?n: ${result}</h2>
+<p>Ki?u tính cách ${result} ph?n ánh xu hu?ng t? nhiên c?a b?n trong giao ti?p, ra quy?t d?nh và làm vi?c.</p>
+<p>B?n có th? tra c?u ngh? nghi?p phù h?p theo nhóm MBTI c?a mình.</p>
+</div>`;
+}
+
+showQuestion();
+
+</script>
+</body>
+</html>
